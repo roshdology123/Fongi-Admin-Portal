@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:fongi_admin_portal/Screens/home_screen.dart';
+import 'package:fongi_admin_portal/core/app_router.dart';
+import 'package:fongi_admin_portal/core/theme.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -11,11 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      title: 'Fongi Admin Portal',
+      theme: themeData(),
+      home: const HomeScreen(),
+      onGenerateRoute: AppRouter.onGeneratedRoute,
+      initialRoute: HomeScreen.routeName,
     );
   }
 }
