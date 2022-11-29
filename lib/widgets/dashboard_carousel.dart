@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fongi_admin_portal/widgets/section_title.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 class DashboardCarousel extends StatelessWidget {
@@ -22,7 +21,7 @@ class DashboardCarousel extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: SectionTitle(title: title),
               ),
               Icon(icon),
