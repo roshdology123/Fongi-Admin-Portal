@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 
 class SectionTitle extends StatelessWidget {
@@ -12,7 +13,7 @@ class SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding:
-      EdgeInsets.symmetric(horizontal: 50),
+      EdgeInsets.symmetric(horizontal: 2.w),
       child: Align(
         alignment: Alignment.topCenter,
         child: Text(
