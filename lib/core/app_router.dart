@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fongi_admin_portal/core/constants.dart';
+import 'package:fongi_admin_portal/screens/new_product.dart';
 import 'package:fongi_admin_portal/screens/screens.dart';
 
 class AppRouter {
@@ -14,6 +15,8 @@ class AppRouter {
         return HomeScreen.route();
       case '/products':
         return ProductsScreen.route();
+      case '/newProduct':
+        return NewProduct.route();
       default:
         return _errorRoute();
     }
