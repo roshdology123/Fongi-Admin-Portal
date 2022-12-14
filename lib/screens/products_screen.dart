@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fongi_admin_portal/widgets/product_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 import '../core/constants.dart';
+import '../cubit/products_cubit.dart';
+import '../models/product.dart';
 
-class ProductsScreen extends StatelessWidget {
+class ProductsScreen extends StatefulWidget {
   const ProductsScreen({Key? key}) : super(key: key);
 
   static const String routeName = '/products';
@@ -14,6 +17,19 @@ class ProductsScreen extends StatelessWidget {
       settings: const RouteSettings(name: routeName),
       builder: (_) => const ProductsScreen(),
     );
+  }
+
+  @override
+  State<ProductsScreen> createState() => _ProductsScreenState();
+}
+
+class _ProductsScreenState extends State<ProductsScreen> {
+  late List<Product> products;
+
+  @override
+  void initState() {
+    products = BlocProvider.of<ProductsCubit>(context).getProducts();
+    super.initState();
   }
 
   @override
@@ -59,38 +75,21 @@ class ProductsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const ProductCard(
-                      title: 'Lorem ipsum',
-                      description: 'Lorem ipsum dolor sit amet',
-                      imgPath: 'assets/images/NikeAirForce.webp'),
-                  const ProductCard(
-                      title: 'Lorem ipsum',
-                      description: 'Lorem ipsum dolor sit amet',
-                      imgPath: 'assets/images/NikeAirForce.webp'),
-                  const ProductCard(
-                      title: 'Lorem ipsum',
-                      description: 'Lorem ipsum dolor sit amet',
-                      imgPath: 'assets/images/NikeAirForce.webp'),
-                  const ProductCard(
-                      title: 'Lorem ipsum',
-                      description: 'Lorem ipsum dolor sit amet',
-                      imgPath: 'assets/images/NikeAirForce.webp'),
-                  const ProductCard(
-                      title: 'Lorem ipsum',
-                      description: 'Lorem ipsum dolor sit amet',
-                      imgPath: 'assets/images/NikeAirForce.webp'),
-                  const ProductCard(
-                      title: 'Lorem ipsum',
-                      description: 'Lorem ipsum dolor sit amet',
-                      imgPath: 'assets/images/NikeAirForce.webp'),
-                  const ProductCard(
-                      title: 'Lorem ipsum',
-                      description: 'Lorem ipsum dolor sit amet',
-                      imgPath: 'assets/images/NikeAirForce.webp'),
-                  const ProductCard(
-                      title: 'Lorem ipsum',
-                      description: 'Lorem ipsum dolor sit amet',
-                      imgPath: 'assets/images/NikeAirForce.webp'),
+                  BlocBuilder<ProductsCubit, ProductsState>(
+                    builder: (context, state) {
+                      if(state is ProductsInitial){
+                        return const CircularProgressIndicator();
+                      }
+                      if(state is ProductsLoaded){
+                        return ProductCard(
+                          products: products,
+                        );
+                      }else{
+                        return const Text('Something went wrong');
+                      }
+
+                    },
+                  ),
                 ],
               ),
             ),

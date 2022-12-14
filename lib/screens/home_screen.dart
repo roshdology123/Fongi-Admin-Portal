@@ -1,9 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 import '../core/constants.dart';
+import '../cubit/products_cubit.dart';
+import '../models/product.dart';
 import '../widgets/dashboard_carousel.dart';
 import '../widgets/product_preview.dart';
 
@@ -21,15 +24,29 @@ class HomeScreen extends StatefulWidget {
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
+
+
+
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  List<Product> products = [];
+
+  @override
+  void initState() {
+    products = BlocProvider.of<ProductsCubit>(context).getProducts();
+    print(products.length);
+    super.initState();
+  }
+
+
   int _current = 0;
-  final List<Widget> widgetList = [
-    const DashboardCarousel(
+  late List<Widget> widgetList = [
+    DashboardCarousel(
       icon: FontAwesomeIcons.bagShopping,
       title: 'Products',
-      details: '213',
+      details: products.length.toString(),
     ),
     const DashboardCarousel(
         icon: FontAwesomeIcons.boxesPacking, title: 'Stock', details: '1251'),
